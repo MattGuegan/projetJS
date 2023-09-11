@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Javascript Matthieu</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="https://firebasestorage.googleapis.com/v0/b/forfun-5938e.appspot.com/o/client.js?alt=media&token=d0c5ee8e-cfdd-4358-886a-e7e0cd84e165"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background: #000000;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        #hero {
+            background-image: url('https://www.epsi.fr/wp-content/uploads/2020/06/code-javascript.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: left;
+            padding: 100px 0;
+        }
+
+        #hero h1 {
+            font-size: 36px;
+            margin-left: 120px;
+            color: #fff;
+        }
+
+        #hero h3 {
+            font-size: 24px;
+            margin-left: 120px;
+            color: #fff;
+        }
+
+        .cta-button {
+            background: #ffa500;
+            color: #fff;
+            text-align: center;
+            padding: 10px 40px;
+            margin: 120px 0;
+            display: inline-block;
+            margin-left: 120px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+        }
+
+        .container-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #87CEEB;
+            width: 300px;
+            height: 350px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            margin-right: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.1);
+        }
+
+        .feature-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .feature-card h4 {
+            font-weight: bold;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+        }
+
+        footer {
+            background: #00008B;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        .modal {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: 0 auto;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            display: none;
+            z-index: 1;
+        }
+
+        .modal-content {
+            text-align: center;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Projet JavaScript</h1>
+    </header>
+
+    <div id="hero">
+        <h1>Alegria Academy</h1>
+        <h3>Apprenez le nocode et changez de vie</h3>
+        <div class="cta-button">Postuler</div>
+    </div>
+
+    <div class="container-cards">
+        <!-- Les cartes seront ajoutées ici via JavaScript -->
+    </div>
+    <footer>
+        © 2023 Alegria Academy - Tous droits réservés
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            var data = {
+                "name": "projects/forfun-5938e/databases/(default)/documents/alegria_js_b7/content",
+                "fields": {
+                    "cards": {
+                        "arrayValue": {
+                            "values": [
+                                {
+                                    "stringValue": "<!-- First Card -->   <div class=\"feature-card\" style=\"width: 300px; height: 350px; padding: 20px; border-radius: 10px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); background-color: #fff; margin-right: 20px;\"><img src=\"https://firebasestorage.googleapis.com/v0/b/naturlypoc.appspot.com/o/istockphoto-1284066336-612x612.jpg?alt=media&token=29d630ba-ba4e-4b02-a8f4-883d46f14376\" alt=\"Avatar\" style=\"width:100%; border-radius: 10px;\"><div style=\"text-align: center;\"><h4><b>Formez Vous</b></h4><p>Le Lorem Ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page.</p></div></div>"
+                                },
+                                {
+                                    "stringValue": "<!-- Second Card -->   <div class=\"feature-card\" style=\"width: 300px; height: 350px; padding: 20px; border-radius: 10px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); background-color: #fff; margin-right: 20px;\"><img src=\"https://firebasestorage.googleapis.com/v0/b/naturlypoc.appspot.com/o/istockphoto-1284066336-612x612.jpg?alt=media&token=29d630ba-ba4e-4b02-a8f4-883d46f14376\" alt=\"Avatar\" style=\"width:100%; border-radius: 10px;\"><div style=\"text-align: center;\"><h4><b>Pratiquez en entreprise</b></h4><p>Le Lorem Ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page.</p></div></div>"
+                                },
+                                {
+                                    "stringValue": "<!-- Third Card -->   <div class=\"feature-card\" style=\"width: 300px; height: 350px; padding: 20px; border-radius: 10px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); background-color: #fff;\"><img src=\"https://firebasestorage.googleapis.com/v0/b/naturlypoc.appspot.com/o/istockphoto-1284066336-612x612.jpg?alt=media&token=29d630ba-ba4e-4b02-a8f4-883d46f14376\" alt=\"Avatar\" style=\"width:100%; border-radius: 10px;\"><div style=\"text-align: center;\"><h4><b>Lancez-vous</b></h4><p>Le Lorem Ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page.</p></div></div>"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "createTime": "2023-09-11T01:03:04.292880Z",
+                "updateTime": "2023-09-11T02:48:07.945865Z"
+            };
+
+            data.fields.cards.arrayValue.values.forEach(function(item) {
+                var card = item.stringValue;
+                jQuery(".container-cards").append(card);
+            });
+
+            jQuery(".cta-button").click(function() {
+                jQuery(".overlay").fadeIn();
+                showApplicationForm();
+            });
+
+            function showApplicationForm() {
+                jQuery(".modal").fadeIn();
+            }
+
+            jQuery(".close").click(function() {
+                hideApplicationForm();
+            });
+
+            function hideApplicationForm() {
+                jQuery(".modal").fadeOut(function() {
+                    jQuery(".overlay").fadeOut();
+                });
+            }
+
+            jQuery("#application-form").submit(function(event) {
+                event.preventDefault();
+                hideApplicationForm();
+            });
+        });
+    // Au clic sur le bouton "Postuler"
+    jQuery(".cta-button").click(function() {
+        // Animer le déplacement vers la gauche de 40px
+        jQuery(this).animate({ marginLeft: '-=40px' }, 400, function() {
+            // Une fois l'animation terminée, appeler la fonction submitPost()
+            submitPost();
+        });
+    });
+    </script>
+    <div class="overlay"></div>
+    <div class="modal">
+        <div class="modal-content">
+            <h2>Formulaire de Candidature</h2>
+            <form id="application-form">
+                <label for="first-name">Prénom:</label><br>
+                <input type="text" id="first-name" name="first-name" value=""><br>
+                <label for="last-name">Nom:</label><br>
+                <input type="text" id="last-name" name="last-name" value=""><br><br>
+                <input type="submit" value="Soumettre">
+                <span class="close">&times;</span>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
